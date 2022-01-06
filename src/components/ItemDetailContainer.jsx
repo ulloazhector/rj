@@ -7,11 +7,12 @@ const ItemDetailContainer = () => {
     const [beer, setBeer] = useState()
 
     const getItem = () => {
-        const URL = `https://api.punkapi.com/v2/beers/random`
+        const URL = `https://my-json-server.typicode.com/cuter97/React-Api/productos`
         fetch(URL)
         .then( res => res.json() )
         .then( data => {
             // Agrego delay
+            console.log(data)
             setTimeout(() => {
                 setBeer(data[0])
             }, 2*1000)
@@ -24,7 +25,7 @@ const ItemDetailContainer = () => {
 
     return (
         <div>
-            <ItemDetail info={beer} price="200"/>
+            item detail container
         </div>
     )
 }

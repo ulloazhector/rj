@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Item from './Item'
 
-const ItemList = ({items}) => {
+const ItemList = ({items, category}) => {
 
     const [beers, setBeers] = useState([])
 
@@ -16,7 +16,7 @@ const ItemList = ({items}) => {
                 else
                     rej(`No hay productos`)
 
-            }, 2000)
+            }, 0*1000)
     
         })
     
@@ -24,13 +24,17 @@ const ItemList = ({items}) => {
             .then(res => {setBeers(res)})
             .catch(err => {console.log(err)})
     
-    }, [items])
-    
-    
+        }, [items])
+
+        // Filtro según el tipo, si no se especifica el tipo se muestran todas (home)
+        const filteredBeers = category === undefined ? beers : 
+                            beers.filter( b => b.tipo.toLowerCase() === category.toLowerCase() )
+
+
 
     return (
-        <ul>
-            { beers.map(beer => <Item key={beer.id} item={beer}/> ) }
+        <ul className='d-flex flex-wrap'>
+            { filteredBeers.map(b => <Item key={b.id} item={b}/> ) }
         </ul>
     )
 }
