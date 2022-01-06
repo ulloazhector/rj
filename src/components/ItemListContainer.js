@@ -8,26 +8,27 @@ const ItemListContainer = () => {
 
     const [beers, setBeers] = useState()
 
-    const getItem = () => {
-        const URL = `https://my-json-server.typicode.com/cuter97/React-Api/productos`
-        fetch(URL)
-        .then( res => res.json() )
-        .then( data => {
-            // Agrego delay
-            setTimeout(() => {
-                setBeers(data)
-            }, 0*1000)
-        })
-    }
-    
     useEffect(() => {
+
+        const getItem = () => {
+            const URL = `https://my-json-server.typicode.com/cuter97/React-Api/productos`
+            fetch(URL)
+            .then( res => res.json() )
+            .then( data => {
+                // Agrego delay
+                setTimeout(() => {
+                    setBeers(data)
+                }, 0*1000)
+            })
+        }
+    
         getItem()
     }, [])
-
+    
 
     return (
         <div>
-            <ItemList items={beers} category={category} />
+            <ItemList items={beers} />
         </div>
     )
 }
