@@ -1,25 +1,21 @@
-import React, {useState, useEffect} from 'react'
-import Item from './Item'
+import React from "react";
+import Item from "./Item";
 
-const ItemList = ({items}) => {
-    const [state, setState] = useState([])
-    // Filtro según el tipo, si no se especifica el tipo se muestran todas (home)
-    
-    // const filteredBeers = category === undefined ? beers : 
-    //                     beers.filter( b => b.tipo.toLowerCase() === category.toLowerCase() )
-    useEffect(() => {
-        setState(items)
-        
-        console.log(state);
-    }, [items])
+const ItemList = ({ items, category }) => {
+  // Filtro según el tipo, si no se especifica el tipo se muestran todas (home)
 
+  const filteredBeers =
+    category === undefined
+      ? items
+      : items.filter((b) => b.tipo.toLowerCase() === category.toLowerCase());
 
-    return (
-        <ul className='d-flex flex-wrap'>
-            {/* { .map((b,i) => (<h5 key={i}>xd</h5>) ) } */}
-            {/* { items.map(b => <Item key={b.id} item={b}/> ) } */}
-        </ul>
-    )
-}
+  return (
+    <ul className="d-flex flex-wrap">
+      {filteredBeers.map((b) => (
+        <Item key={b.id} item={b} />
+      ))}
+    </ul>
+  );
+};
 
-export default ItemList
+export default ItemList;

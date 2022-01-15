@@ -1,7 +1,25 @@
-import React from 'react'
+import React , {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
 
 const NavBar = (props) => {
+
+    const [cat, setCat] = useState([])
+    
+    useEffect(() => {
+        const getData = async () => {
+            const data = await fetch(`https://my-json-server.typicode.com/cuter97/React-Api/productos`)
+            const values = await data.json()
+
+            setCat([...new Set( values.map(v => v.tipo) )])
+
+        }
+        
+        getData()
+    }, [])
+
+
+
+
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -20,9 +38,12 @@ const NavBar = (props) => {
                                 Cervezas
                             </span>
                             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><Link to={`category/Ale`} className="dropdown-item">Ales</Link></li>
-                                <li><Link to={`category/Lager`} className="dropdown-item">Lagers</Link></li>
-                                <li><Link to={`category/Stout`} className="dropdown-item">Stouts</Link></li>
+                                {
+                                    cat.map( (c,i) => (
+                                        // Genero el menu dinamico
+                                        <li key={i}><Link to={`category/${c}`} className="dropdown-item">{c}s</Link></li>
+                                    ))
+                                }
                             </ul>
                         </li>
                         <li className="nav-item" style={{ marginLeft: `auto` }}>

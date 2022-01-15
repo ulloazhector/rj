@@ -1,33 +1,34 @@
-import React, {useState, useEffect} from 'react'
-import ItemDetail from './ItemDetail'
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
+import ItemDetail from "./ItemDetail";
 
 const ItemDetailContainer = () => {
+  const { id } = useParams();
 
-    const [beer, setBeer] = useState()
+  const [beer, setBeer] = useState([]);
 
+  useEffect(() => {
     const getItem = () => {
-        const URL = `https://my-json-server.typicode.com/cuter97/React-Api/productos`
-        fetch(URL)
-        .then( res => res.json() )
-        .then( data => {
-            // Agrego delay
-            console.log(data)
-            setTimeout(() => {
-                setBeer(data[0])
-            }, 2*1000)
-        })
-    }
-    
-    useEffect(() => {
-        getItem()
-    }, [])
+      const URL = `https://my-json-server.typicode.com/cuter97/React-Api/productos/${id}`;
+      fetch(URL)
+        .then((res) => res.json())
+        .then((data) => {
+          // Agrego delay
+          setTimeout(() => {
+            setBeer(data);
+          }, 0 * 1000);
+        });
+    };
 
-    return (
-        <div>
-            item detail container
+    getItem();
+  }, [id]);
+
+  return(
+        <div className="d-flex justify-content-center">
+            <ItemDetail beer={beer} />
         </div>
-    )
-}
+  ) 
+};
 
-export default ItemDetailContainer
+export default ItemDetailContainer;
