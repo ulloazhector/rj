@@ -46,8 +46,8 @@ const NavBar = (props) => {
                                 }
                             </ul>
                         </li>
-                        <li className="nav-item" style={{ marginLeft: `auto` }}>
-                            <span className="nav-link" >{props.children}</span>
+                        <li className="nav-item">
+                            {props.children}
                         </li>
                     </ul>
                 </div>

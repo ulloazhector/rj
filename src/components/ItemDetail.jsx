@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {Link} from "react-router-dom"
+
+import CartContext from "./contexts/CartContext";
 import ItemCount from "./ItemCount";
 
+
+
 const ItemDetail = ({ beer }) => {
-    const { producto, precio, imagen, info } = beer;
+    const { producto, precio, imagen, info, stock } = beer;
     const [listo, setListo] = useState(false)
     const [quantity, setQuantity] = useState(1)
+
+    const {addItemToCart} = useContext(CartContext)
+
+
 
     const onAdd = () => {
         setListo(true)
@@ -25,13 +33,23 @@ const ItemDetail = ({ beer }) => {
 
                 {
                     !listo &&
-                    <ItemCount stock="5" initial={quantity} onAdd={onAdd} setQuantity={setQuantity}/>
+                    <ItemCount 
+                        stock={stock}
+                        initial={quantity}
+                        onAdd={onAdd}
+                        setQuantity={setQuantity}
+                    />
                 }
                 {    
                     listo && <>
-                        <Link to={`/cart`} type="button" className="btn btn-success mt-3 w-100">
-                            Agregar al carrito ({quantity})
+                        <Link 
+                            to={`/cart`}
+                            type="button"
+                            className="btn btn-success mt-3 w-100"
+                            onClick={() => addItemToCart({...beer, quantity})}
+                        >Agregar al carrito ({quantity})
                         </Link>
+
                         <button onClick={onBack} type="button" className="btn btn-outline-danger mt-3 w-100">
                             Volver
                         </button>

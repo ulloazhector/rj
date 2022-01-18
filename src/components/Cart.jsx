@@ -1,9 +1,57 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import CartItem from './CartItem'
+import CartContext from './contexts/CartContext'
 
 const Cart = () => {
+
+    const {carrito, clearCart} = useContext(CartContext)
+
     return (
-        <div>
-            <h2>Carrito a implementar...</h2>
+        <div className='container'>
+            <div className='row justify-content-center'>
+                <div className='col-6'>
+                    <h2 className='my-4'>Carrito</h2>
+                    {
+                        carrito?.length > 0 
+                            ? <hr />
+                            : <p>El carrito está vacío.</p>
+                    }
+                    <ul className='p-0'>
+                        {
+                            carrito?.map( item => <CartItem key={item.id} item={item} /> )
+                        }
+                    </ul>
+                    {
+                        carrito?.length > 0 &&
+                        <>
+                            <hr />
+                            <h3 className='text-end'>Total: $ 
+                                {
+                                    carrito?.reduce((prev, next) => prev + next.quantity*next.precio, 0)
+                                }
+                            </h3>
+
+                            <div className='text-end'>
+                                <button 
+                                    onClick={clearCart}
+                                    className='btn btn-success'
+                                    style={{margin: `1rem 0 0 2rem`}}
+                                    >
+                                    Comprar
+                                </button>
+                                <button 
+                                    onClick={clearCart}
+                                    className='btn btn-danger'
+                                    style={{margin: `1rem 0 0 1rem`}}
+                                    >
+                                    Limpiar carrito
+                                </button>
+                            </div>
+                        </>
+                    }
+                </div>
+            </div>
+
         </div>
     )
 }

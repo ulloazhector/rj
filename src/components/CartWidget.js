@@ -1,12 +1,23 @@
 import { FaShoppingCart } from 'react-icons/fa';
-import React from 'react'
+import CartContext from './contexts/CartContext'
+
+import React, {useContext} from 'react'
+import { Link } from 'react-router-dom';
 
 const CartWidget = () => {
+    const {carrito} = useContext(CartContext)
+
     return (
-        <div>
+        <Link 
+            to={`/cart`} 
+            style={{textDecoration: `none`}}
+            className='nav-link'
+        >
             <FaShoppingCart/>
-            <span> 5</span>
-        </div>
+            <span> {
+                carrito?.length > 0 && carrito?.length
+            }</span>
+        </Link>
     )
 }
 
