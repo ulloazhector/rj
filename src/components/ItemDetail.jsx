@@ -24,7 +24,7 @@ const ItemDetail = ({ beer }) => {
     }
 
     return (
-        <div className="card m-4 shadow d-flex flex-row" style={{ width: 800, border: 'none' }}>
+        <div className="card m-4 shadow d-flex flex-row overflow-hidden rounded" style={{ width: 800, border: 'none' }}>
             <img src={imagen} className="card-img-top w-50 m-auto" alt={producto} />
             <div className="card-body">
                 <h4 className="card-title">{producto}</h4>

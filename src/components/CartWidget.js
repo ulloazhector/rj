@@ -8,16 +8,22 @@ const CartWidget = () => {
     const {carrito} = useContext(CartContext)
 
     return (
-        <Link 
-            to={`/cart`} 
-            style={{textDecoration: `none`}}
-            className='nav-link'
-        >
-            <FaShoppingCart/>
-            <span> {
-                carrito?.length > 0 && carrito?.length
-            }</span>
-        </Link>
+        <>
+            {
+                carrito?.length > 0 &&
+                <Link 
+                    to={`/cart`} 
+                    style={{textDecoration: `none`}}
+                    className='nav-link'
+                >
+                    <FaShoppingCart/>
+                    <span> {
+                        carrito?.length > 0 && 
+                        carrito?.reduce((prev, next) => prev + next.quantity,0)
+                    }</span>
+                </Link>
+            }
+        </>
     )
 }
 

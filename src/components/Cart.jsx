@@ -1,4 +1,6 @@
 import React, {useContext} from 'react'
+import { FaLongArrowAltLeft } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 import CartItem from './CartItem'
 import CartContext from './contexts/CartContext'
 
@@ -14,7 +16,15 @@ const Cart = () => {
                     {
                         carrito?.length > 0 
                             ? <hr />
-                            : <p>El carrito está vacío.</p>
+                            : <>
+                                <p>El carrito está vacío.</p>
+                                <Link 
+                                    to={`/`}
+                                    className='btn btn-primary'
+                                >
+                                    <FaLongArrowAltLeft/> Ir a comprar
+                                </Link>
+                            </>
                     }
                     <ul className='p-0'>
                         {

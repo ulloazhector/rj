@@ -13,7 +13,7 @@ const ItemCount = ({stock, initial, onAdd, setQuantity}) => {
     
     return (
         <>
-            <p className="card-text">Stock: {stock}</p>
+            <p className={`card-text fw-bold text-${stock < 9 ? `danger` : `success`}`}>Stock: {stock}</p>
             <div className="d-flex justify-content-between align-items-center">
                 <button onClick={decrease} type="button" className="btn btn-primary">-</button>
                 <h6>{cant}</h6>
