@@ -28,16 +28,18 @@ const Cart = () => {
                     }
                     <ul className='p-0'>
                         {
+                            // lista
                             carrito?.map( item => <CartItem key={item.id} item={item} /> )
                         }
                     </ul>
+
                     {
                         carrito?.length > 0 &&
                         <>
                             <hr />
                             <h3 className='text-end'>Total: $ 
                                 {
-                                    carrito?.reduce((prev, next) => prev + next.quantity*next.precio, 0)
+                                    carrito?.reduce((prev, next) => prev + next.quantity * next.price, 0)
                                 }
                             </h3>
 

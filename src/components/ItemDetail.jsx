@@ -7,7 +7,7 @@ import ItemCount from "./ItemCount";
 
 
 const ItemDetail = ({ beer }) => {
-    const { producto, precio, imagen, info, stock } = beer;
+    const { name, price, imageUrl, about, stock } = beer;
     const [listo, setListo] = useState(false)
     const [quantity, setQuantity] = useState(1)
 
@@ -25,11 +25,11 @@ const ItemDetail = ({ beer }) => {
 
     return (
         <div className="card m-4 shadow d-flex flex-row overflow-hidden rounded" style={{ width: 800, border: 'none' }}>
-            <img src={imagen} className="card-img-top w-50 m-auto" alt={producto} />
+            <img src={imageUrl} className="card-img-top w-50 m-auto" alt={name} />
             <div className="card-body">
-                <h4 className="card-title">{producto}</h4>
-                <h5 className="card-text">${precio}</h5>
-                <p className="card-text">{info}</p>
+                <h4 className="card-title">{name}</h4>
+                <h5 className="card-text">${price}</h5>
+                <p className="card-text">{about}</p>
 
                 {
                     !listo &&

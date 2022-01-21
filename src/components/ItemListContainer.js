@@ -2,30 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 
+import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+
 const ItemListContainer = () => {
     const { category } = useParams();
 
     const [beers, setBeers] = useState([]);
 
+    
     useEffect(() => {
-        const getItem = () => {
-            const URL = `https://my-json-server.typicode.com/cuter97/React-Api/productos`;
-            fetch(URL)
-                .then((res) => res.json())
-                .then((data) => {
-                    // Agrego delay
-                    // setTimeout(() => {
-                    setBeers(data);
-                    // }, 0*1000)
-                });
-        };
 
-        getItem();
-    }, []);
+        const db = getFirestore();
+        const colRef = collection(db, `beers-collection`)
+
+        // Filtro según el tipo, si no se especifica el tipo se muestran todas (home)
+        const getting = async () => {
+            const q = query(colRef,where(
+                `type`,
+                `${category ? `==`:`!=`}`,
+                category ?? null))
+                
+                const querySnapshot = await getDocs(q)
+                setBeers(querySnapshot.docs.map( doc => ({id: doc.id, ...doc.data()}) ))
+            }
+                
+        getting()
+
+    }, [category]);
+
+
+
 
     return (
         <div>
-            <ItemList items={beers} category={category} />
+            <ItemList items={beers} />
         </div>
     );
 };

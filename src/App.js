@@ -8,7 +8,6 @@ import Cart from './components/Cart';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './components/contexts/CartContext';
 
-
 function App() {
 
     return (
@@ -28,6 +27,7 @@ function App() {
                     </Routes>
 
                 </BrowserRouter>
+
             </CartProvider>
         </div>
     );

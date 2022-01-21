@@ -1,21 +1,24 @@
 import React from "react";
 import Item from "./Item";
 
-const ItemList = ({ items, category }) => {
-  // Filtro según el tipo, si no se especifica el tipo se muestran todas (home)
+const ItemList = ({ items }) => {
 
-  const filteredBeers =
-    category === undefined
-      ? items
-      : items.filter((b) => b.tipo.toLowerCase() === category.toLowerCase());
+    return (
+        <>
+            {
+                items.length > 0 
+                ? 
+                <ul className="d-flex flex-wrap">
+                        {items.map((b) => (
+                            <Item key={b.id} item={b} />
+                            ))}
+                    </ul>
+                :
+                <h2 className="m-2">Categoría vacía</h2>
+            }
+        </>
+    );
 
-  return (
-    <ul className="d-flex flex-wrap">
-      {filteredBeers.map((b) => (
-        <Item key={b.id} item={b} />
-      ))}
-    </ul>
-  );
-};
+}
 
 export default ItemList;

@@ -1,20 +1,27 @@
 import React , {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
+import { collection, getDocs, getFirestore } from "firebase/firestore";
 
 const NavBar = (props) => {
 
+    // Categorias
     const [cat, setCat] = useState([])
     
     useEffect(() => {
-        const getData = async () => {
-            const data = await fetch(`https://my-json-server.typicode.com/cuter97/React-Api/productos`)
-            const values = await data.json()
 
-            setCat([...new Set( values.map(v => v.tipo) )])
+        const db = getFirestore();
+        const getCategories = async () => {
 
-        }
+            const querySnapshot = await getDocs(collection(db, "beers-collection"))
+            // Filtro los tipos y guardo en el state
+            setCat([...new Set(
+                querySnapshot.docs?.map(
+                    doc => doc.data().type
+                )
+            )])
+        };
         
-        getData()
+        getCategories()
     }, [])
 
 
@@ -41,7 +48,13 @@ const NavBar = (props) => {
                                 {
                                     cat.map( (c,i) => (
                                         // Genero el menu dinamico
-                                        <li key={i}><Link to={`category/${c}`} className="dropdown-item">{c}s</Link></li>
+                                        <li key={i}>
+                                            <Link 
+                                                to={`category/${c}`} 
+                                                className="dropdown-item"
+                                            >{c}s
+                                            </Link>
+                                        </li>
                                     ))
                                 }
                             </ul>
