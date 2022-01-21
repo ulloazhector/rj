@@ -11,13 +11,13 @@ const Cart = () => {
     return (
         <div className='container'>
             <div className='row justify-content-center'>
-                <div className='col-6'>
-                    <h2 className='my-4'>Carrito</h2>
+                <div className='col-10 col-sm-8 col-md-8 col-lg-6 mb-3'>
+                    <h2 className='my-4 display-6'>Carrito</h2>
                     {
                         carrito?.length > 0 
                             ? <hr />
                             : <>
-                                <p>El carrito está vacío.</p>
+                                <p className='alert alert-primary'>El carrito está vacío.</p>
                                 <Link 
                                     to={`/`}
                                     className='btn btn-primary'

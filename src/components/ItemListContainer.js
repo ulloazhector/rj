@@ -21,7 +21,7 @@ const ItemListContainer = () => {
                 `type`,
                 `${category ? `==`:`!=`}`,
                 category ?? null))
-                
+
                 const querySnapshot = await getDocs(q)
                 setBeers(querySnapshot.docs.map( doc => ({id: doc.id, ...doc.data()}) ))
             }
