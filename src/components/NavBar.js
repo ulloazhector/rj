@@ -28,7 +28,7 @@ const NavBar = (props) => {
 
 
     return (
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light shadow">
             <div className="container-fluid">
                 <Link to={`/`} className="navbar-brand">Montaña</Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">

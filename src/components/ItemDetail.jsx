@@ -33,16 +33,16 @@ const ItemDetail = ({ beer }) => {
                 <div className="col p-0">
                     <div className="card-body">
                         <h4 className="card-title">{name}</h4>
-                        <h5 className="card-text">${price}</h5>
                         <p className="card-text">{about}</p>
+                        <h5 className="card-text">${price}</h5>
 
                         {
                             !listo &&
                             <ItemCount 
-                                stock={stock}
-                                initial={quantity}
-                                onAdd={onAdd}
-                                setQuantity={setQuantity}
+                            stock={stock}
+                            initial={quantity}
+                            onAdd={onAdd}
+                            setQuantity={setQuantity}
                             />
                         }
                         {    

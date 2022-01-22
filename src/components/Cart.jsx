@@ -44,13 +44,13 @@ const Cart = () => {
                             </h3>
 
                             <div className='text-end'>
-                                <button 
-                                    onClick={clearCart}
+                                <Link 
+                                    to={`/checkout`}
                                     className='btn btn-success'
                                     style={{margin: `1rem 0 0 2rem`}}
                                     >
                                     Comprar
-                                </button>
+                                </Link>
                                 <button 
                                     onClick={clearCart}
                                     className='btn btn-danger'
