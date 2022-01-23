@@ -22,7 +22,7 @@ const firebaseConfig = {
 };
 
 // // Initialize Firebase
-export const a = initializeApp(firebaseConfig)
+export const app = initializeApp(firebaseConfig)
 
 
 

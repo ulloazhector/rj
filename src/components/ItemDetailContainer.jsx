@@ -4,12 +4,15 @@ import { doc, getDoc, getFirestore } from "firebase/firestore"
 
 
 import ItemDetail from "./ItemDetail";
+import Spinner from "./Spinner";
 
 const ItemDetailContainer = () => {
     const { id } = useParams();
     
     
     const [beer, setBeer] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     
     useEffect(() => {
         const db = getFirestore();
@@ -20,6 +23,7 @@ const ItemDetailContainer = () => {
 
             if (docSnap.exists()) {
                 setBeer({id: id, ...docSnap.data()})
+                setLoading(false)
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
@@ -30,9 +34,17 @@ const ItemDetailContainer = () => {
     }, [id]);
 
     return (
-        <div className="d-flex justify-content-center px-3">
-            <ItemDetail beer={beer} />
-        </div>
+        <>
+            {
+                loading 
+                ?
+                    <Spinner />
+                :
+                    <div className="d-flex justify-content-center px-3">
+                        <ItemDetail beer={beer} />
+                    </div>
+            }
+        </>
     )
 };
 

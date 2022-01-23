@@ -3,14 +3,16 @@ import { Link } from 'react-router-dom';
 import { addDoc, collection, getFirestore} from "firebase/firestore"
 import CartContext from './contexts/CartContext'
 import CheckoutForm from './CheckoutForm';
+import Spinner from './Spinner';
 
 
 const Checkout = () => {
-    const {carrito, clearCart} = useContext(CartContext)
-    const [isDone, setIsDone] = useState(false)
-    const [order, setOrder] = useState(``)
+    const {carrito, clearCart}  = useContext(CartContext)
+    const [isDone, setIsDone]   = useState(false)
+    const [order, setOrder]     = useState(``)
+    const [loading, setLoading] = useState(false);
 
-    const inputNameRef = useRef()
+    const inputNameRef  = useRef()
     const inputPhoneRef = useRef()
     const inputEmailRef = useRef()
 
@@ -37,15 +39,16 @@ const Checkout = () => {
             date: date.toUTCString(),
             total: carrito?.reduce((prev, next) => prev + next.quantity * next.price, 0)
         }
+
         const db = getFirestore()
         const colRef = collection(db, `orders`)
         const docRef = await addDoc(colRef, buyObject)
 
         setOrder(docRef.id)
+        setLoading(false)
         setIsDone(true)
         clearCart()
 
-        
     }
 
 
@@ -64,8 +67,10 @@ const Checkout = () => {
         else if(!inputEmail.value)
             inputEmail.focus()
         // Genero la orden
-        else
+        else{
+            setLoading(true)
             generateOrder()
+        }
     }
 
 
@@ -82,19 +87,20 @@ const Checkout = () => {
                                 <Link to={`/`} className='btn btn-primary'>Ir al home</Link>
                             </> 
                         : 
-                            <>
-                                <h2 className='display-5 mb-4'>Checkout</h2>
-                                <CheckoutForm 
-                                    inputNameRef={inputNameRef} 
-                                    inputPhoneRef={inputPhoneRef} 
-                                    inputEmailRef={inputEmailRef} 
-                                    submitHandler={submitHandler}
-                                    />
-                            </>
-                        
+                            loading 
+                            ?
+                                <Spinner/>
+                            :
+                                <>
+                                    <h2 className='display-5 mb-4'>Checkout</h2>
+                                    <CheckoutForm 
+                                        inputNameRef={inputNameRef} 
+                                        inputPhoneRef={inputPhoneRef} 
+                                        inputEmailRef={inputEmailRef} 
+                                        submitHandler={submitHandler}
+                                        />
+                                </>
                     }
-                    
-
                 </div>
             </div>
         </div>

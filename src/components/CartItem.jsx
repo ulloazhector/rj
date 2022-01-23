@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
+import { FaTrashAlt } from 'react-icons/fa'
 import CartContext from './contexts/CartContext'
-import './style/style.css'
+import './style/style.scss'
 
 const CartItem = ({ item }) => {
     const { removeItemFromCart } = useContext(CartContext)
@@ -26,8 +27,8 @@ const CartItem = ({ item }) => {
                             <h4 className='card-text'>${item.quantity * item.price}</h4>
                             <button 
                                 onClick={() => removeItemFromCart(item.id)}
-                                className='btn btn-outline-danger'
-                            >Eliminar</button>
+                                className='btn text-danger'
+                            ><FaTrashAlt/></button>
 
                         </div>
                     </div>

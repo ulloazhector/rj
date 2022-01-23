@@ -1,0 +1,37 @@
+@media only screen and (min-width: 768px) {
+    .media {
+      height: 150px;
+    }
+  }
+  body{
+      height: 100vh;
+      background-color: #efefef;
+
+  }
+
+    .beer-card-container{
+        transition: all .2s ease;
+
+        .beer-card{
+            transition: all .2s ease;
+    
+            &:hover{
+                box-shadow: 0 1rem 3rem rgba(#000, .175);
+            }
+        }
+
+        &:hover{
+            transform: translateY(-4px);
+        }
+    }
+
+    .app-body{
+        background-color: #efefef;
+    }
+
+    .item-list{
+        display: grid;
+        gap: 16px;
+        grid-template-columns: repeat(auto-fill, 288px);
+        justify-content: center;
+    }
