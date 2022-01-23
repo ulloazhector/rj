@@ -15,6 +15,8 @@ const ItemDetailContainer = () => {
 
     
     useEffect(() => {
+        let isCancelled = false
+
         const db = getFirestore();
 
         const getItem = async () => {
@@ -22,8 +24,10 @@ const ItemDetailContainer = () => {
             const docSnap = await getDoc(docRef)
 
             if (docSnap.exists()) {
-                setBeer({id: id, ...docSnap.data()})
-                setLoading(false)
+                if(!isCancelled){
+                    setBeer({id: id, ...docSnap.data()})
+                    setLoading(false)
+                }
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
@@ -31,6 +35,11 @@ const ItemDetailContainer = () => {
         };
 
         getItem();
+
+        return() => {
+            isCancelled = true
+        }
+
     }, [id]);
 
     return (
