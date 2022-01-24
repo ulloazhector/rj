@@ -1,3 +1,5 @@
+<img src="compra.gif"></img>
+
 # Proyecto final de React JS
 
 ## Montaña
