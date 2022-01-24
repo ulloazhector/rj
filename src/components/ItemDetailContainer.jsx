@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { doc, getDoc, getFirestore } from "firebase/firestore"
+import React, { useState, useEffect } 
+                            from "react";
+
+import { useParams }        from "react-router-dom";
+
+import { doc, getDoc,getFirestore }      
+                            from "firebase/firestore"
 
 
-import ItemDetail from "./ItemDetail";
-import Spinner from "./Spinner";
+import ItemDetail           from "./ItemDetail";
+import Spinner              from "./Spinner";
+
+
+
 
 const ItemDetailContainer = () => {
     const { id } = useParams();

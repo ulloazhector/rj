@@ -13,7 +13,7 @@ const Banner = ({category}) => {
 
         setLoading(true)
         const storage = getStorage()
-        const imagesRef = ref(storage, `beer-categories/${category.toLowerCase()}.jpg`)
+        const imagesRef = ref(storage, `beer-categories/${category?.toLowerCase()}.jpg`)
         const getUrl = async() => {
             const url = await getDownloadURL(imagesRef)
             if(!isCancelled){
@@ -47,7 +47,7 @@ const Banner = ({category}) => {
                                 zIndex: 1,
                                 textShadow: `2px 1px 8px #000000`,
                                 position: `absolute`,
-                                top: `40%`,
+                                top: `35%`,
                                 left: `20%`
                             }}>
                             {category}
