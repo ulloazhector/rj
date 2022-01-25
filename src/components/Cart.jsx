@@ -49,7 +49,7 @@ const Cart = () => {
                                     className='btn btn-success'
                                     style={{margin: `1rem 0 0 2rem`}}
                                     >
-                                    Comprar
+                                    Terminar compra
                                 </Link>
                                 <button 
                                     onClick={clearCart}

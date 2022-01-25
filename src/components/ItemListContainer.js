@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import ItemList from "./ItemList";
 
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
-import Banner from "./Banner";
+
 import Spinner from "./Spinner";
 import OrderBy from "./OrderBy";
 
@@ -15,9 +15,14 @@ const ItemListContainer = () => {
 
     const {search} = useContext(SearchContext);
     
+    // allBeers contiene todos los items del catálogo
+    // mientras que beers contiene los items buscados y/o los que están ordenados
     const [allBeers, setAllBeers] = useState([]);
     const [beers, setBeers] = useState([])
+
     const [loading, setLoading] = useState(true);
+
+    // order es el críterio para ordenar todos los items o los que fueron buscados
     const [order, setOrder] = useState(``);
 
 
@@ -51,6 +56,7 @@ const ItemListContainer = () => {
                 
         getting()
 
+        // Cancelo todas las operaciones asíncronas
         return () => {
             isCancelled = true
         }
@@ -60,6 +66,7 @@ const ItemListContainer = () => {
 
 
     const ordenar = useCallback(() => {
+            // Ordeno según el criterio selecionado
             switch (order) {
                 case `masBarato`:
                     setBeers(
@@ -108,9 +115,10 @@ const ItemListContainer = () => {
                 :
                     <>
                         {
+                            // Si estoy en el home puedo ordenar los items
                             category 
                             ?
-                                <Banner category={category}/>
+                                <h2 className="item-list mt-3 display-5">{category}</h2>
                             :
                                 <OrderBy setOrder={setOrder}/>
                         }

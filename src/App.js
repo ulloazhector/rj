@@ -18,6 +18,7 @@ import Checkout             from './components/Checkout'
 
 function App() {
 
+    console.log(process.env)
     return (
         <div className="App app-body">
             <CartProvider>
