@@ -12,7 +12,7 @@ const CartWidget = () => {
             to={`/cart`} 
             style={{textDecoration: `none`}}
             className='nav-link'
-        >
+            >
             <FaShoppingCart/>
             <span> {
                 carrito?.length > 0 && 

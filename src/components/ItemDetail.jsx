@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {Link} from "react-router-dom"
 
 import CartContext from "./contexts/CartContext";
@@ -7,14 +7,20 @@ import ItemCount from "./ItemCount";
 
 
 const ItemDetail = ({ beer }) => {
-    const { name, price, imageUrl, about, stock } = beer;
+    const { name, price, imageUrl, about, stock, id } = beer;
     const [listo, setListo] = useState(false)
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(0)
+    const [quantityInCart, setQuantityInCart] = useState(0)
 
-    const {addItemToCart} = useContext(CartContext)
+    const { carrito, addItemToCart } = useContext(CartContext)
 
-
-
+    useEffect(() => {
+        // Busco el item de los que están en el carrito y guardo en el estado quantityInCart
+        const item = carrito?.find(beer => beer.id === id)
+        setQuantityInCart(item?.quantity)
+    }, [carrito, id])
+    
+    
     const onAdd = () => {
         setListo(true)
     }
@@ -22,7 +28,8 @@ const ItemDetail = ({ beer }) => {
     const onBack = () => {
         setListo(false)
     }
-
+    
+   
     return (
         <div className="card m-4 shadow d-flex flex-row overflow-hidden rounded" style={{ width: 800, border: 'none' }}>
             <div className="row flex-sm-row flex-column px-3 align-items-center">
@@ -32,17 +39,18 @@ const ItemDetail = ({ beer }) => {
 
                 <div className="col p-0">
                     <div className="card-body">
-                        <h4 className="card-title">{name}</h4>
+                        <h4 className="card-title display-6">{name}</h4>
                         <p className="card-text">{about}</p>
                         <h5 className="card-text">${price}</h5>
 
                         {
                             !listo &&
                             <ItemCount 
-                            stock={stock}
-                            initial={quantity}
-                            onAdd={onAdd}
-                            setQuantity={setQuantity}
+                                stock={ stock }
+                                initial={ 1 }
+                                onAdd={ onAdd }
+                                setQuantity={ setQuantity }
+                                quantityInCart={quantityInCart}
                             />
                         }
                         {    

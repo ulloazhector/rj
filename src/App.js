@@ -1,24 +1,22 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import { BrowserRouter,Routes, Route }     
-                            from 'react-router-dom'
+import { BrowserRouter,Routes, Route }  from 'react-router-dom'
 
-import { CartProvider }     from './components/contexts/CartContext'
-import { SearchProvider }   from './components/contexts/SearchContext'
-
-import NavBar               from './components/NavBar'
-import CartWidget           from './components/CartWidget'
-import ItemListContainer    from './components/ItemListContainer'
-import ItemDetailContainer  from './components/ItemDetailContainer'
-import Cart                 from './components/Cart'
-import Checkout             from './components/Checkout'
+import { CartProvider }                 from './components/contexts/CartContext'
+import { SearchProvider }               from './components/contexts/SearchContext'
+            
+import NavBar                           from './components/NavBar'
+import CartWidget                       from './components/CartWidget'
+import ItemListContainer                from './components/ItemListContainer'
+import ItemDetailContainer              from './components/ItemDetailContainer'
+import Cart                             from './components/Cart'
+import Checkout                         from './components/Checkout'
 
 
 
 
 function App() {
 
-    console.log(process.env)
     return (
         <div className="App app-body">
             <CartProvider>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 const CartContext = React.createContext()
-
 const buyCart = JSON.parse(localStorage.getItem(`buy-cart`))
+
+
 
 const CartProvider = ({children}) => {
 
@@ -18,13 +19,19 @@ const CartProvider = ({children}) => {
     const addItemToCart = (beer) => {
         
         const newItem = {...beer}
-        // Si ya está en el carrito cambio la cantidad (no la sumo)
+        // Si está en el carrito sumo la cantidad
         if(isInCart(beer.id)){
+            const oldItem = carrito?.find(item => item.id === beer.id)
+
+            oldItem.quantity += beer.quantity
+
             const changedCarrito = carrito?.filter(item => item.id !== beer.id)
-            setCarrito([newItem,...changedCarrito])
+            setCarrito([oldItem, ...changedCarrito])
+
+
         }
         else
-            setCarrito([newItem, ...carrito])
+        setCarrito([newItem, ...carrito])
     }
     
     const removeItemFromCart = (itemId) => {
@@ -40,10 +47,10 @@ const CartProvider = ({children}) => {
 
 
     // data que paso al provider
-    const data = {carrito, addItemToCart, clearCart, removeItemFromCart}
+    const data = { carrito, addItemToCart, clearCart, removeItemFromCart }
 
     return (
-        <CartContext.Provider value={data}>
+        <CartContext.Provider value={ data }>
             {children}
         </CartContext.Provider>
     )

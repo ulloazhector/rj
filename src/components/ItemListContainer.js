@@ -37,7 +37,7 @@ const ItemListContainer = () => {
         const getting = async () => {
 
             try{
-                const q = query(colRef,where(
+                const q = query(colRef, where(
                     `type`,
                     `${category ? `==`:`!=`}`,
                     category ?? null))

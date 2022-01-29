@@ -83,8 +83,9 @@
         
         box-shadow: 0 20px 50px 0 rgba(0,0,0,.3);
         border: 0;
+        overflow: hidden;
         
-        transition: all .25s;
+        transition: all .3s;
         transform: translateY(20px);
         
         &.show{
@@ -92,6 +93,16 @@
             opacity: 1;
             
             transform: translateY(4px);
+        }
+
+
+        .dropdown-item{
+        transition: all .25s;
+        
+        &:hover{
+                background-color: transparent;
+                transform: translateX(10px);
+            }
         }
     }
 
